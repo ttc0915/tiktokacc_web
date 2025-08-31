@@ -1,245 +1,191 @@
-# TikTok库存管理系统 - Python数据管理器
+# 🚀 TikTok库存管理网站
 
-这是一个用于管理TikTok账号库存数据的Python工具，可以自动扫描本地数据目录，生成JSON文件，并提供HTTP API接口供前端网站使用。
+一个专业的TikTok账号数据可视化管理平台，提供全球账号分布统计、地区筛选、移动端适配等功能。
 
-## 功能特性
+## ✨ 主要功能
 
-- 🔍 **自动数据扫描**: 扫描指定目录结构，解析TikTok账号数据
-- 📊 **数据聚合**: 按国家和粉丝区间统计账号数量
-- 🌐 **HTTP API服务**: 提供RESTful API接口供前端调用
-- 🔄 **实时数据刷新**: 支持手动或自动刷新数据
-- ⚙️ **配置化管理**: 通过配置文件自定义各项设置
-- 📝 **详细日志**: 记录所有操作和错误信息
+### 📊 数据可视化
+- **地区账号分布图表** - 直观显示各地区账号数量
+- **国家排行榜** - 按账号数量排序的国家列表
+- **粉丝区间分布** - 不同粉丝数量区间的统计
+- **实时数据更新** - 支持手动和自动数据刷新
 
-## 快速开始
+### 🌍 地区管理
+- **多地区支持** - 欧洲、东南亚、中东等地区
+- **智能筛选** - 按地区、国家代码搜索
+- **详细统计** - 每个国家的详细粉丝分布
 
-### 1. 环境要求
+### 📱 移动端优化
+- **完全响应式设计** - 完美适配手机、平板
+- **触摸优化** - 专门的移动端交互优化
+- **流畅体验** - 优化的滚动和点击响应
 
-- Python 3.7+
-- 无需额外依赖库（使用Python标准库）
+### 💼 营销功能
+- **账号销售推广** - 内置营销弹窗
+- **Telegram联系** - 直接跳转到联系方式
+- **专业展示** - 提升业务可信度
 
-### 2. 目录结构
+## 🛠️ 技术栈
 
-确保你的数据目录按以下结构组织：
+### 前端
+- **React 18** - 现代化前端框架
+- **TypeScript** - 类型安全的JavaScript
+- **Vite** - 快速构建工具
+- **ECharts** - 专业图表库
 
+### 后端
+- **Python 3.8+** - 数据处理和服务器
+- **异步处理** - 高效的数据管理
+- **JSON API** - RESTful接口设计
+
+### 特色
+- **零依赖数据库** - 基于文件系统的数据存储
+- **实时同步** - 数据变更自动检测
+- **缓存优化** - 智能缓存提升性能
+
+## 🚀 快速开始
+
+### 📋 环境要求
+- Python 3.8+ 
+- Node.js 16+
+- 现代浏览器（Chrome、Edge、Firefox）
+
+### 📦 安装步骤
+
+1. **克隆项目**
+   ```bash
+   git clone https://github.com/你的用户名/tiktok-inventory-website.git
+   cd tiktok-inventory-website
+   ```
+
+2. **准备数据**
+   - 将TikTok账号数据按以下结构组织：
+   ```
+   粉丝分类/
+   ├── 东南亚/
+   │   ├── US/
+   │   │   ├── 0-500.txt
+   │   │   ├── 500-1000.txt
+   │   │   └── ...
+   │   └── 其他国家/
+   ├── 中东/
+   └── EU/
+   ```
+
+3. **启动后端服务**
+   ```bash
+   python 启动服务器.py
+   ```
+   按提示选择数据目录
+
+4. **启动前端网站**
+   ```bash
+   cd 可视化tiktok账号地球数据
+   npm install
+   npm run dev
+   ```
+
+5. **访问网站**
+   - 打开浏览器访问：`http://localhost:5173`
+
+## 📖 使用说明
+
+### 🔧 数据管理
+1. **设置数据路径** - 首次运行时选择包含"粉丝分类"的目录
+2. **自动解析** - 系统自动扫描并解析账号数据
+3. **实时更新** - 数据文件变更后可手动刷新
+
+### 🌐 网站功能
+- **地区筛选** - 点击区域按钮筛选特定地区
+- **搜索功能** - 在搜索框输入国家名或代码
+- **详情查看** - 点击国家卡片查看详细分布
+- **移动端** - 手机访问自动适配界面
+
+### 📊 数据格式
+每个txt文件包含该粉丝区间的账号列表：
 ```
-粉丝分类/
-├── 欧洲/
-│   ├── DE/
-│   │   ├── 0-500.txt
-│   │   ├── 500-1000.txt
-│   │   ├── 1000-2000.txt
-│   │   └── ...
-│   ├── FR/
-│   │   ├── 0-500.txt
-│   │   └── ...
-│   └── ...
-├── 东南亚/
-│   ├── US/
-│   │   ├── 0-500.txt
-│   │   └── ...
-│   └── ...
-└── 中东/
-    └── ...
-```
-
-### 3. 启动服务
-
-**方法一：双击启动（推荐）**
-```bash
-# Windows: 双击 启动服务器.py
-# 或者命令行运行：
-python 启动服务器.py
-```
-
-**方法二：命令行启动**
-```bash
-# 启动完整服务（HTTP API + 数据生成）
-python tiktok_data_manager.py
-
-# 只生成JSON文件
-python tiktok_data_manager.py --generate-only
-
-# 自定义参数
-python tiktok_data_manager.py --data-dir ./粉丝分类 --port 8081
-```
-
-### 4. 使用API
-
-服务启动后，可以通过以下接口访问数据：
-
-```bash
-# 获取数据
-GET http://localhost:8080/api/data
-
-# 刷新数据
-GET http://localhost:8080/api/refresh
-
-# 获取服务状态
-GET http://localhost:8080/api/status
-```
-
-## 配置文件
-
-编辑 `config.json` 自定义设置：
-
-```json
-{
-  "data_directory": "粉丝分类",
-  "output_file": "可视化tiktok账号地球数据/public/data/aggregated.json",
-  "server": {
-    "port": 8080,
-    "auto_start": true,
-    "cors_enabled": true
-  },
-  "file_watcher": {
-    "enabled": true,
-    "check_interval": 30,
-    "auto_refresh": true
-  }
-}
-```
-
-## 数据格式
-
-### 输入数据格式
-
-每个TXT文件包含账号列表，一行一个账号：
-
-```
-# 这是注释行，会被忽略
-account1
-account2
-account3
+account1@example.com
+account2@example.com
+# 注释行会被忽略
 ```
 
-### 输出JSON格式
+## 🔧 配置说明
 
-```json
-{
-  "generatedAt": "2024-01-01T12:00:00.000Z",
-  "brackets": ["0-500", "500-1000", ...],
-  "totals": {
-    "accounts": 12345
-  },
-  "countries": [
-    {
-      "code": "US",
-      "nameZh": "美国",
-      "region": "东南亚",
-      "centroid": [-97, 38],
-      "byBracket": {
-        "0-500": 100,
-        "500-1000": 50
-      },
-      "totals": {
-        "accounts": 150
-      }
-    }
-  ],
-  "regions": ["欧洲", "东南亚", "中东"]
-}
+### 后端配置
+- **端口设置** - 默认8080，可在启动时修改
+- **数据缓存** - 自动缓存解析结果提升性能
+- **CORS支持** - 支持跨域访问
+
+### 前端配置
+- **API地址** - 自动检测本地API服务
+- **刷新间隔** - 可配置自动刷新时间
+- **移动端适配** - 自动检测设备类型
+
+## 📱 移动端支持
+
+### 完美适配
+- ✅ 触摸滚动优化
+- ✅ 按钮大小适配（最小44px）
+- ✅ 响应式布局
+- ✅ 手势操作支持
+
+### 测试设备
+- iPhone Safari
+- Android Chrome
+- iPad Safari
+- 各种Android设备
+
+## 🎯 营销功能
+
+### 账号销售推广
+- **弹窗展示** - 页面加载时显示营销信息
+- **Telegram集成** - 一键跳转到@ttc0915
+- **专业设计** - 提升品牌形象和可信度
+
+## 📝 开发说明
+
+### 项目结构
+```
+├── 可视化tiktok账号地球数据/     # 前端项目
+│   ├── src/
+│   │   ├── ui/App.tsx          # 主应用组件
+│   │   ├── ui/DataLoader.tsx   # 数据加载器
+│   │   └── main.tsx            # 入口文件
+│   ├── index.html              # HTML模板
+│   └── package.json            # 前端依赖
+├── tiktok_data_manager.py      # 数据管理器
+├── 启动服务器.py               # 服务器启动脚本
+├── requirements.txt            # Python依赖
+└── 启动指南.md                 # 详细使用说明
 ```
 
-## 前端集成
+### 扩展开发
+1. **添加新图表** - 在App.tsx中添加ECharts组件
+2. **新增数据源** - 扩展DataLoader支持更多格式
+3. **自定义样式** - 修改CSS样式和主题色彩
+4. **API扩展** - 在数据管理器中添加新接口
 
-修改前端代码，使其能够从API获取数据：
+## 🤝 贡献指南
 
-```javascript
-// 获取数据
-async function fetchData() {
-  try {
-    const response = await fetch('http://localhost:8080/api/data');
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error('获取数据失败:', error);
-    // 回退到本地文件
-    return await fetch('/data/aggregated.json').then(r => r.json());
-  }
-}
+1. Fork 项目
+2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 打开 Pull Request
 
-// 刷新数据
-async function refreshData() {
-  await fetch('http://localhost:8080/api/refresh');
-}
-```
+## 📄 许可证
 
-## 命令行参数
+本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
 
-```bash
-python tiktok_data_manager.py [选项]
+## 📞 联系方式
 
-选项：
-  --data-dir, -d       数据目录路径
-  --output, -o         输出JSON文件路径
-  --port, -p           HTTP服务端口
-  --generate-only      只生成JSON文件，不启动服务器
-  --no-server          生成文件但不启动服务器
-  --help, -h           显示帮助信息
-```
+- **Telegram**: [@ttc0915](https://t.me/ttc0915)
+- **项目链接**: [https://github.com/你的用户名/tiktok-inventory-website](https://github.com/你的用户名/tiktok-inventory-website)
 
-## 日志文件
+## 🙏 致谢
 
-程序运行时会生成 `tiktok_data_manager.log` 日志文件，记录：
+感谢所有为这个项目做出贡献的开发者和用户！
 
-- 数据扫描过程
-- API请求记录
-- 错误和警告信息
-- 性能统计
+---
 
-## 故障排除
-
-### 常见问题
-
-**1. 找不到数据目录**
-- 确保 `粉丝分类` 目录存在
-- 检查 `config.json` 中的路径设置
-- 运行启动脚本时会提示创建示例结构
-
-**2. 端口被占用**
-- 程序会自动查找可用端口（8080-8179）
-- 或在配置文件中指定其他端口
-
-**3. 前端无法获取数据**
-- 检查CORS设置
-- 确认服务器正在运行
-- 查看浏览器控制台错误信息
-
-**4. 数据没有更新**
-- 手动调用 `/api/refresh` 接口
-- 检查文件权限
-- 查看日志文件了解详细错误
-
-### 性能优化
-
-- 大量数据时建议定期清理日志文件
-- 可以通过配置文件调整扫描间隔
-- 考虑在生产环境中使用专业Web服务器
-
-## 开发和扩展
-
-### 添加新功能
-
-1. 在 `TikTokDataManager` 类中添加方法
-2. 在 `TikTokAPIHandler` 中添加新的API端点
-3. 更新配置文件支持新选项
-
-### 自定义数据处理
-
-可以修改 `scan_directory` 方法来：
-- 支持其他文件格式
-- 添加数据验证
-- 实现自定义聚合逻辑
-
-## 许可证
-
-此项目为内部工具，仅供参考和学习使用。
-
-## 更新日志
-
-### v1.0.0
-- 初始版本
-- 基本数据扫描和API功能
-- 配置文件支持
-- 详细日志记录 
+**⭐ 如果这个项目对您有帮助，请给我们一个Star！** 
