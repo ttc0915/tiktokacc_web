@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>TikTok 账号地球可视化</title>
+    <style>
+      @font-face {
+        font-family: 'ZenMaruGothic';
+        src: url('https://fonts.gstatic.com/s/zenmarugothic/v14/HI_XiZQeDG0bOgsYM3Y4.woff2') format('woff2');
+        font-display: swap;
+      }
+      /* 完全消除白框 - CSS重置 */
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { 
+        height: 100%; 
+        width: 100%; 
+        margin: 0; 
+        padding: 0; 
+        overflow-x: hidden;
+      }
+      #root {
+        width: 100%; 
+        margin: 0; 
+        padding: 0; 
+        /* 移除height限制，让内容自然展开 */
+        min-height: 100vh;
+      }
+      body { 
+        font-family: 'ZenMaruGothic', "PingFang SC", "Noto Sans JP", "Microsoft YaHei", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; 
+        background: radial-gradient(1200px 800px at 70% 20%, #0e1d33, #050b16);
+        min-height: 100vh;
+        -webkit-overflow-scrolling: touch; /* 改善移动端滚动 */
+        -webkit-tap-highlight-color: transparent; /* 移除移动端点击高亮 */
+        -webkit-touch-callout: none; /* 禁用长按菜单 */
+        /* 允许页面正常滚动，只禁用按钮等的文本选择 */
+      }
+      /* 允许某些元素的文本选择 */
+      input, textarea, .selectable {
+        -webkit-user-select: text;
+        user-select: text;
+      }
+      /* 只对按钮和交互元素禁用文本选择 */
+      button, .interactive-element {
+        -webkit-user-select: none;
+        user-select: none;
+        -webkit-touch-callout: none;
+      }
+      /* 确保页面可以正常滚动 */
+      html, body {
+        touch-action: pan-y pinch-zoom; /* 允许垂直滚动和缩放 */
+        overflow-y: auto; /* 确保可以滚动 */
+        overflow-x: hidden; /* 禁止水平滚动 */
+      }
+      #root {
+        touch-action: pan-y pinch-zoom; /* 继承滚动设置 */
+      }
+      .sakura { position: fixed; z-index: 1; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; background-image: url('https://unpkg.com/sakura-js/dist/sakura.png'); animation: fall 12s linear infinite; opacity: 0.4; }
+      @keyframes fall { from { background-position: 0 -1000px; } to { background-position: 0 1000px; } }
+    </style>
+  </head>
+  <body>
+    <div class="sakura"></div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+  </html>
+

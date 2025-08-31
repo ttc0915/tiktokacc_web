@@ -1,0 +1,63 @@
+# Python缓存文件
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# 数据缓存和日志文件
+data_cache.json
+*.log
+tiktok_data_manager.log
+
+# 配置文件（包含敏感信息）
+config.json
+
+# Node.js 依赖
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 构建输出
+可视化tiktok账号地球数据/dist/
+可视化tiktok账号地球数据/build/
+
+# 开发工具
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 操作系统生成的文件
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# 数据文件（太大且敏感）
+粉丝分类/
+data/
+*.csv
+*.xlsx
+
+# 临时文件
+*.tmp
+*.temp
+*~
+
+# 用户个人数据
+user_data/
+personal/
+
+# 环境变量
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# TypeScript 编译缓存
+*.tsbuildinfo 
