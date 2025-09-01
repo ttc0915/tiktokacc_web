@@ -48,6 +48,22 @@ const ALL_BRACKETS: BracketKey[] = [
 	'10000+'
 ];
 
+// 地区颜色映射函数
+const getRegionColor = (region: string): string => {
+	const regionColorMap: Record<string, string> = {
+		'EU': '#4a90e2',           // 欧洲 - 蓝色
+		'欧洲': '#4a90e2',          // 欧洲 - 蓝色
+		'东南亚': '#50c878',         // 东南亚 - 绿色
+		'中东': '#ffa500',          // 中东 - 橙色
+		'非洲': '#9b59b6',          // 非洲 - 紫色
+		'北美': '#1abc9c',          // 北美 - 青色
+		'南美': '#f39c12',          // 南美 - 黄色
+		'大洋洲': '#e74c3c',        // 大洋洲 - 红色
+	};
+	
+	return regionColorMap[region] || '#6c757d'; // 默认灰色
+};
+
 type FilterState = {
 	selectedBrackets: Set<BracketKey>;
 	selectedRegions: Set<string>;
@@ -1877,8 +1893,7 @@ const MainApp: React.FC = () => {
 								{filteredCountries
 									.filter(country => filters.selectedRegions.has(country.region))
 									.map((country, index) => {
-										const colors = ['#4a90e2', '#50c878', '#ffa500', '#ff6b6b', '#9b59b6', '#1abc9c', '#f39c12'];
-										const color = colors[index % colors.length];
+										const color = getRegionColor(country.region);
 										const handleCountryClick = () => {
 											setSelectedCountry(country);
 											setCurrentPage('detail');
