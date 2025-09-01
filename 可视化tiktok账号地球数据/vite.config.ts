@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import path from 'path';
 
 export default defineConfig(({ mode }) => ({
-	base: mode === 'production' ? '/tiktokacc_web/' : '/',
+	base: '/', // Netlify部署使用根路径，GitHub Pages使用 '/tiktokacc_web/'
 	server: {
 		host: '0.0.0.0', // 支持局域网访问
 		port: 5173,
