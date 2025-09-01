@@ -1,7 +1,7 @@
 [build]
   base = "可视化tiktok账号地球数据"
   command = "npm run build:deploy"
-  publish = "可视化tiktok账号地球数据/dist"
+  publish = "dist"
 
 [build.environment]
   NODE_VERSION = "18"
