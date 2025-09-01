@@ -87,20 +87,91 @@ function ensureDir(dir: string) {
 function main() {
 	if (!fs.existsSync(DATA_DIR)) {
 		console.warn('数据目录不存在:', DATA_DIR);
-		console.log('生成空数据文件...');
+		console.log('生成示例数据用于部署预览...');
 		
-		// 生成空数据
-		const emptyData = {
+		// 生成示例数据
+		const sampleCountries: CountryAgg[] = [
+			{
+				code: 'GB',
+				nameZh: '英国',
+				region: 'EU',
+				centroid: [-3.436, 55.378],
+				byBracket: { '0-500': 15000, '500-1000': 12000, '1000-2000': 10000, '2000-3000': 8000, '10000+': 6544 },
+				totals: { accounts: 51544 }
+			},
+			{
+				code: 'PK',
+				nameZh: '巴基斯坦',
+				region: '东南亚',
+				centroid: [69.345, 30.375],
+				byBracket: { '0-500': 8000, '500-1000': 5000, '1000-2000': 4000, '2000-3000': 2000, '10000+': 1181 },
+				totals: { accounts: 20181 }
+			},
+			{
+				code: 'NL',
+				nameZh: '荷兰',
+				region: 'EU',
+				centroid: [5.291, 52.132],
+				byBracket: { '0-500': 4000, '500-1000': 2500, '1000-2000': 1500, '2000-3000': 800, '10000+': 241 },
+				totals: { accounts: 9041 }
+			},
+			{
+				code: 'AU',
+				nameZh: '澳大利亚',
+				region: '东南亚',
+				centroid: [133.775, -25.274],
+				byBracket: { '0-500': 4000, '500-1000': 2400, '1000-2000': 1500, '2000-3000': 800, '10000+': 272 },
+				totals: { accounts: 8972 }
+			},
+			{
+				code: 'FR',
+				nameZh: '法国',
+				region: 'EU',
+				centroid: [2.213, 46.227],
+				byBracket: { '0-500': 3500, '500-1000': 2200, '1000-2000': 1500, '2000-3000': 900, '10000+': 430 },
+				totals: { accounts: 8530 }
+			},
+			{
+				code: 'IQ',
+				nameZh: '伊拉克',
+				region: '中东',
+				centroid: [43.679, 33.223],
+				byBracket: { '0-500': 3500, '500-1000': 2000, '1000-2000': 1400, '2000-3000': 900, '10000+': 320 },
+				totals: { accounts: 8120 }
+			},
+			{
+				code: 'TR',
+				nameZh: '土耳其',
+				region: '东南亚',
+				centroid: [35.243, 38.963],
+				byBracket: { '0-500': 3000, '500-1000': 1800, '1000-2000': 1200, '2000-3000': 800, '10000+': 321 },
+				totals: { accounts: 7121 }
+			},
+			{
+				code: 'SA',
+				nameZh: '沙特阿拉伯',
+				region: '中东',
+				centroid: [45.079, 23.885],
+				byBracket: { '0-500': 3000, '500-1000': 1700, '1000-2000': 1200, '2000-3000': 800, '10000+': 361 },
+				totals: { accounts: 7061 }
+			}
+		];
+		
+		const totalAccounts = sampleCountries.reduce((s, c) => s + c.totals.accounts, 0);
+		const regions = Array.from(new Set(sampleCountries.map(c => c.region)));
+		
+		const sampleData = {
 			generatedAt: new Date().toISOString(),
 			brackets: ALL_BRACKETS,
-			totals: { accounts: 0 },
-			countries: [],
-			regions: []
+			totals: { accounts: totalAccounts },
+			countries: sampleCountries.sort((a, b) => b.totals.accounts - a.totals.accounts),
+			regions: regions
 		};
 		
 		ensureDir(path.dirname(OUTPUT));
-		fs.writeFileSync(OUTPUT, JSON.stringify(emptyData, null, 2), 'utf-8');
-		console.log('空数据文件已生成:', OUTPUT);
+		fs.writeFileSync(OUTPUT, JSON.stringify(sampleData, null, 2), 'utf-8');
+		console.log('示例数据文件已生成:', OUTPUT);
+		console.log(`总计: ${totalAccounts} 个账号, ${sampleCountries.length} 个国家, ${regions.length} 个区域`);
 		return;
 	}
 
