@@ -23,4 +23,14 @@ logs/
 
 # 缓存
 .cache/
-.temp/ 
+.temp/
+
+# Python服务器文件（仅本地使用，不部署到GitHub）
+启动服务器.py
+tiktok_data_manager.py
+file_watcher.py
+__pycache__/
+*.py[cod]
+*$py.class
+data_cache.json
+config.json 
