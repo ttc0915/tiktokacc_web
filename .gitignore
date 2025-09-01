@@ -33,4 +33,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 data_cache.json
-config.json 
+config.json
+
+# 允许真实数据文件推送到GitHub用于网站展示
+# 注释掉下面这行以允许真实数据文件被推送
+# 可视化tiktok账号地球数据/public/data/aggregated.json 
