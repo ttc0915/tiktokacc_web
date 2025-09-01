@@ -1,0 +1,19 @@
+[build]
+  base = "可视化tiktok账号地球数据"
+  command = "npm run build:deploy"
+  publish = "可视化tiktok账号地球数据/dist"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable" 
